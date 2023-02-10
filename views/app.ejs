@@ -1,0 +1,24 @@
+<%- include('header'); -%>
+    <div class="box" id="heading">
+        <h1>
+            <%= weekday %>
+        </h1>
+    </div>
+    <div class="box">
+        <% for(var i=0; i<items.length; i++){ %>
+            <div class="item">
+                <input type="checkbox">
+                <p>
+                    <%= items[i] %>
+                        </>
+            </div>
+            <% } %>
+                <form action="/" method="post" class="item">
+                    <input type="text" name="pending" placeholder="New Item" required autocomplete="off">
+                    <button type="submit">+</button>
+                </form>
+    </div>
+    <form action="/about" method="post">
+        <button>About Us</button>
+    </form>
+    <%- include('footer'); -%>
