@@ -1,5 +1,6 @@
 const express = require("express");
 const parser = require("body-parser");
+const mongoose = require("mongoose");
 
 const app = express();
 var choices = ["Brush Teeth", "Drink Water", "Skincare"];
@@ -38,3 +39,42 @@ app.post("/about", (req, res) => {
 app.post("/success", (req, res) => {
   res.render("success");
 });
+
+//* connecting mongodb to js
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect("mongodb://127.0.0.1:27018/todo");
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+//* creating the data base and to do using mongodb and mongoose
+
+// creating models and collection using mongoose
+
+//  creating mongoose.Schema
+
+const todo_schema = new mongoose.Schema({
+  name: String,
+});
+
+//*  creating collection or database
+
+const todo = mongoose.model("todo", todo_schema);
+
+//* creating document inside the collection
+
+const t1 = new todo({
+  name: "Brush Teeth",
+});
+const t2 = new todo({
+  name: "Drink Water",
+});
+const t3 = new todo({
+  name: "Do Yoga",
+});
+
+// t1.save();
+// t2.save();
+// t3.save();
