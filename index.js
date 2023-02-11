@@ -1,9 +1,11 @@
 const express = require("express");
 const parser = require("body-parser");
 const mongoose = require("mongoose");
+const { name } = require("ejs");
+mongoose.set("strictQuery", true);
 
 const app = express();
-var choices = ["Brush Teeth", "Drink Water", "Skincare"];
+// var choices = ["Brush Teeth", "Drink Water", "Skincare"];
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -12,33 +14,6 @@ app.listen(3000, function () {
 });
 
 app.set("view engine", "ejs");
-
-var today = new Date();
-
-app.get("/", (req, res) => {
-  var options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  var day = today.toLocaleDateString("en-US", options);
-  res.render("app", { weekday: day, items: choices });
-});
-
-app.post("/", (req, res) => {
-  var choice = req.body.pending;
-  choices.push(choice);
-  res.redirect("/");
-});
-
-app.post("/about", (req, res) => {
-  res.render("about");
-});
-
-app.post("/success", (req, res) => {
-  res.render("success");
-});
 
 //* connecting mongodb to js
 
@@ -75,9 +50,68 @@ const t3 = new todo({
   name: "Do Yoga",
 });
 
-// t1.save();
-// t2.save();
-// t3.save();
+const defaults = [t1, t2, t3];
 
-// console.log(todo.findOne({ name: "Brush Teeth" }, "name"));
-// document.body.style.overflow = "hidden";
+//* Get request
+
+var today = new Date();
+
+app.get("/", (req, res) => {
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  var day = today.toLocaleDateString("en-US", options);
+
+  todo.find({}, function (err, foundItems) {
+    if (foundItems.length === 0) {
+      todo.insertMany(defaults, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Insertion Successful !!");
+        }
+      });
+      res.redirect("/");
+    } else {
+      res.render("app", { weekday: day, items: foundItems });
+    }
+    // console.log(foundItems);
+  });
+});
+// });
+
+//* post request
+
+app.post("/", (req, res) => {
+  var choice = req.body.pending;
+
+  //* sending the pending data to mongo db database
+
+  var t4 = new todo({
+    name: choice,
+  });
+
+  t4.save();
+
+  // array.forEach((element) => {});
+  // choices.push(choice);
+  res.redirect("/");
+  // console.log(req);
+});
+
+app.post("/about", (req, res) => {
+  res.render("about");
+});
+
+app.post("/success", (req, res) => {
+  res.render("success");
+});
+
+// deletion route
+
+app.post("/delete", (req, res) => {
+  console.log(req);
+});

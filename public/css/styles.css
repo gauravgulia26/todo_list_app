@@ -17,8 +17,8 @@ h1 {
 
 .box {
   /* border: 2px solid red; */
-  max-width: 450px;
-  margin: 50px auto;
+  max-width: 420px;
+  margin: 20px auto;
   background: white;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
@@ -119,4 +119,17 @@ footer {
   text-transform: uppercase;
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button img {
+  /* border: 2px solid red; */
+  border-radius: 100px;
+  width: 70%;
+  /* background-color: red; */
+  color: white;
+}
+
+.delete {
+  padding: 10px;
+  background-color: white;
 }

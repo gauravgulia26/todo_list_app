@@ -7,14 +7,18 @@
     <div class="box">
         <% for(var i=0; i<items.length; i++){ %>
             <div class="item">
-                <input type="checkbox">
+                <form action="/delete" method="post">
+                    <button class="delete">
+                        <img src="images/cancel.png">
+                    </button>
+                </form>
                 <p>
-                    <%= items[i] %>
+                    <%= items[i].name %>
                         </>
             </div>
             <% } %>
                 <form action="/" method="post" class="item">
-                    <input type="text" name="pending" placeholder="New Item" required autocomplete="off">
+                    <input type="text" name="pending" placeholder="Enter Your Task" required autocomplete="off">
                     <button type="submit">+</button>
 
                 </form>
