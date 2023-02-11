@@ -59,7 +59,7 @@ const todo_schema = new mongoose.Schema({
   name: String,
 });
 
-//*  creating collection or database
+//*  creating model or database
 
 const todo = mongoose.model("todo", todo_schema);
 
@@ -78,3 +78,6 @@ const t3 = new todo({
 // t1.save();
 // t2.save();
 // t3.save();
+
+// console.log(todo.findOne({ name: "Brush Teeth" }, "name"));
+// document.body.style.overflow = "hidden";
