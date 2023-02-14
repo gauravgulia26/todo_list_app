@@ -22,10 +22,11 @@
 
     </div>
     <div class=" weather box">
-        <p>
+        <p class="icon">
             <%= temperature %>
                 <%= city_name %>
         </p>
+        <i class="owf owf-3x  icon owf-<%= status_code%>"></i>
     </div>
 
     <%- include('footer'); -%>
