@@ -65,11 +65,11 @@ const t1 = new todo({
 const t2 = new todo({
   name: "Drink Water",
 });
-const t3 = new todo({
-  name: "Do Yoga",
-});
+// const t3 = new todo({
+//   name: "Do Yoga",
+// });
 
-const defaults = [t1, t2, t3];
+const defaults = [t1, t2];
 
 // creating documents inside the weather collections
 
